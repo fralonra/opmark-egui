@@ -34,9 +34,9 @@ opmark-egui examples/test.opmark
 opmark-egui -s examples/test.opmark
 ```
 
-The above command will generate an excutable bundling your OpMark file and other assets (only images are supported for now) as well.
+The above command will generate an executable bundling your OpMark file and other assets (only images are supported for now) as well.
 
-You can excute this file directly without copying assets and refering them:
+You can execute this file directly without copying assets and refering them:
 
 ```bash
 ./opmark
