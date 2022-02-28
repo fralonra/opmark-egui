@@ -1,7 +1,6 @@
 # opmark-egui
 
 [![Latest version](https://img.shields.io/crates/v/opmark-egui.svg)](https://crates.io/crates/opmark-egui)
-[![Documentation](https://docs.rs/opmark-egui/badge.svg)](https://docs.rs/opmark-egui)
 ![MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
 An experimental presentation application based on [OpMark](https://crates.io/crates/opmark), powered by [egui](https://crates.io/crates/egui). It's still in pre-alpha stage.
