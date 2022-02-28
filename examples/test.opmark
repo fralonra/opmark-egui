@@ -1,0 +1,94 @@
+# Rich Text
+
+This is $an$ simple *example* of rich text. Enjoy.
+
+_*Nested style*_ is ~supported~ as well.
+No /new line/ here.
+
+> This line is quoted.
+> This line is quoted as well.
+
+\# Escape
+
+Click to <https://github.com> to find more.
+
+Or visit my profile: [Fralonra](https://github.com/fralonra). :P
+
+# Headings
+
+# 1
+---t
+## 2
+---t
+### 3
+#### 4
+---t
+##### 5
+###### 6
+---
+
+# Images
+
+---t1
+Picture with width of 50: `<w50>`.
+
+Will show up after one click.
+
+![test](examples/test.png)<w50>
+---t2
+Picture with width of 50 and height of 100: `<w50|h100>`.
+
+Will show up after two clicks.
+
+![test](examples/test.png)<w50|h100>
+---t0
+Picture with width of 100 and height of 50: `<h50|w100>`.
+
+Will show up initially.
+
+![test](examples/test.png)<h50|w100>
+
+---
+
+# Unordered List
+
+---t2
+- Will show up after two clicks
+  - Level 2
+    - Level 3
+      - ✨Magic ✨
+        - Support four levels
+    - Another level 3
+- Foo
+  - Bar
+t---
+
+- Will show up initially
+
+# Ordered List
+
+1. Ordered List
+  1. Next level
+    1. Foo
+    1. Auto indexing is supported
+  2. Below is a horizontal separator
+----
+----v
+2. Above is a vertical separator
+  3. Custom indexing is supported
+  4. Bar
+
+---
+
+# Code Block
+
+```javascript
+let a = 1;
+console.log(a);
+```
+
+```
+This is the last page.
+
+You can use arrow keys to navigate.
+```

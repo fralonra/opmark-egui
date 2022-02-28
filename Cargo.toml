@@ -1,0 +1,20 @@
+[package]
+authors = ["Zoron <fralonra@aliyun.com>"]
+description = "An experimental presentation application based on OpMark, powered by egui"
+edition = "2021"
+homepage = "https://github.com/fralonra/opmark-egui"
+keywords = ["egui", "opmark", "presentation"]
+license = "MIT"
+name = "opmark-egui"
+readme = "README.md"
+repository = "https://github.com/fralonra/opmark-egui"
+version = "0.0.1"
+
+[[bin]]
+name = "opmark-egui"
+
+[dependencies]
+clap = {version = "3.0", features = ["derive"]}
+eframe = "0.16"
+image = "0.24"
+opmark = "0.0.1"

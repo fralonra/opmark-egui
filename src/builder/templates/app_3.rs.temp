@@ -1,0 +1,32 @@
+            });
+        });
+
+        let resp = layout.response.interact(egui::Sense::click());
+        if resp.clicked() {
+            self.next();
+        }
+
+        let is = ctx.input();
+        if is.key_released(egui::Key::Escape) {
+            frame.quit();
+        } else if is.key_released(egui::Key::ArrowRight) || is.key_released(egui::Key::ArrowDown) {
+            self.next();
+        } else if is.key_released(egui::Key::ArrowLeft) || is.key_released(egui::Key::ArrowUp) {
+            self.prev();
+        }
+    }
+}
+
+impl App {
+    fn next(&mut self) {
+        if self.scene_idx < [[[max_scene_idx]]] - 1 {
+            self.scene_idx += 1;
+        }
+    }
+
+    fn prev(&mut self) {
+        if self.scene_idx > 0 {
+            self.scene_idx -= 1;
+        }
+    }
+}

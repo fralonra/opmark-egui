@@ -1,0 +1,54 @@
+const NORMAL_SPACING_X: f32 = 2.0;
+const NORMAL_SPACING_Y: f32 = 2.0;
+const BIG_SPACING_X: f32 = 8.0;
+const INDENT_GRID_SIZE: f32 = 16.0;
+const NEW_LINE_HEIGHT: f32 = 16.0;
+
+fn indent(indent: f32, ui: &mut egui::Ui) -> egui::Rect {
+    let indent_width = INDENT_GRID_SIZE * indent;
+    let (rect, _) = ui.allocate_exact_size(
+        egui::vec2(indent_width, INDENT_GRID_SIZE),
+        egui::Sense::hover(),
+    );
+    rect
+}
+
+fn load_texture(image_data: &'static [u8], frame: &epi::Frame) -> Result<Texture, image::ImageError> {
+    let image = image::load_from_memory(image_data).expect("Failed to load image");
+    let size = [image.width() as usize, image.height() as usize];
+    let image_buffer = image.to_rgba8();
+    let pixels = image_buffer.into_vec();
+    let image = epi::Image::from_rgba_unmultiplied(size, &pixels);
+
+    let texture = frame.alloc_texture(image);
+    let size = egui::Vec2::new(size[0] as f32, size[1] as f32);
+
+    let texture = Texture { id: texture, size };
+    Ok(texture)
+}
+
+struct Texture {
+    id: egui::TextureId,
+    size: egui::Vec2,
+}
+
+pub struct App {
+    scene_idx: usize,
+    textures: HashMap<String, Texture>,
+}
+
+impl Default for App {
+    fn default() -> Self {
+        Self {
+            scene_idx: 0,
+            textures: HashMap::new(),
+        }
+    }
+}
+
+impl epi::App for App {
+    fn name(&self) -> &str {
+        [[[name]]]
+    }
+
+    fn setup(&mut self, _: &egui::CtxRef, frame: &eframe::epi::Frame, _: Option<&dyn epi::Storage>) {
