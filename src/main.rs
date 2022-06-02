@@ -1,5 +1,4 @@
 mod app;
-mod builder;
 
 use clap::Parser as ClapParser;
 use opmark::Parser;
@@ -15,24 +14,6 @@ struct Args {
     /// Input file
     #[clap(parse(from_os_str))]
     input: Option<PathBuf>,
-
-    /// Output file
-    #[clap(short, long, parse(from_os_str))]
-    output: Option<PathBuf>,
-
-    /// Build a standalone binary
-    #[clap(short, long)]
-    standalone: bool,
-}
-
-fn build_standalone(input: &Path, output: &Path) {
-    let file_content = read_to_string(input).expect("[ERROR] Reading file");
-
-    let parser = Parser::new(file_content);
-
-    let builder = builder::Builder::new(parser);
-    let dir = builder.code();
-    builder.build(dir.as_path(), output);
 }
 
 fn run_app(path: &Path) {
@@ -56,18 +37,9 @@ fn run_app(path: &Path) {
 
 fn main() {
     let args = Args::parse();
-
     let input = match &args.input {
         Some(input) => input.as_path(),
         None => Path::new("index.opmark"),
     };
-    let output = match &args.output {
-        Some(output) => output.as_path(),
-        None => Path::new("opmark"),
-    };
-    if !args.standalone {
-        run_app(&input);
-    } else {
-        build_standalone(&input, &output);
-    }
+    run_app(&input);
 }

@@ -27,20 +27,6 @@ Sepecify a file to use:
 opmark-egui examples/test.opmark
 ```
 
-### Build a standalone binary file
-
-```bash
-opmark-egui -s examples/test.opmark
-```
-
-The above command will generate an executable bundling your OpMark file and other assets (only images are supported for now) as well.
-
-You can execute this file directly without copying assets and refering them:
-
-```bash
-./opmark
-```
-
 ## Credits
 
 Inspired by [easymark](https://github.com/emilk/egui/tree/master/egui_demo_lib/src/easy_mark).
