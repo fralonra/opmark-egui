@@ -25,8 +25,8 @@ fn run_app(path: &Path) {
     let app = app::App::new(parser.title, parser.parser);
     let native_options = eframe::NativeOptions {
         always_on_top: false,
-        maximized: false,
-        decorated: true,
+        maximized: if parser.fullscreen { true } else { false },
+        decorated: if parser.fullscreen { false } else { true },
         drag_and_drop_support: false,
         icon_data: None,
         initial_window_size: None,
