@@ -1291,9 +1291,9 @@ checksum = "da32515d9f6e6e489d7bc9d84c71b060db7247dc035bbe44eac88cf87486d8d5"
 
 [[package]]
 name = "opmark"
-version = "0.0.1"
+version = "0.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "894817ce78b0eecc74c850e120c7b01b671725f7cc4817b770db383d4b5d698a"
+checksum = "471cc81b82191587ec3ea0aedb51f90d96590dfe0d53788a4ff32181bf78f4b2"
 
 [[package]]
 name = "opmark-egui"

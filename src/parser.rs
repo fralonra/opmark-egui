@@ -1,5 +1,10 @@
 use opmark::Parser as OpParser;
 
+#[cfg(windows)]
+const LINE_ENDING: &'static str = "\r\n";
+#[cfg(not(windows))]
+const LINE_ENDING: &'static str = "\n";
+
 pub struct Parser {
     pub fullscreen: bool,
     pub parser: opmark::Parser,
@@ -12,8 +17,8 @@ impl Parser {
         let mut title = "OpMark Egui".to_owned();
         let mut origin_str = s.clone();
 
-        if let Some(rest) = s.strip_prefix("---meta\n") {
-            if let Some(meta_end) = rest.find("---\n") {
+        if let Some(rest) = s.strip_prefix(&format!("---meta{}", LINE_ENDING)) {
+            if let Some(meta_end) = rest.find(&format!("---{}", LINE_ENDING)) {
                 let meta = rest[..meta_end].to_owned();
                 for line in meta.split("\n") {
                     let parts: Vec<&str> = line.splitn(2, ':').collect();

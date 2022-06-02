@@ -17,4 +17,4 @@ name = "opmark-egui"
 clap = {version = "3.0", features = ["derive"]}
 eframe = "0.16"
 image = "0.24"
-opmark = "0.0.1"
+opmark = "0.0.2"
