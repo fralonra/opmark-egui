@@ -1297,7 +1297,7 @@ checksum = "894817ce78b0eecc74c850e120c7b01b671725f7cc4817b770db383d4b5d698a"
 
 [[package]]
 name = "opmark-egui"
-version = "0.0.3"
+version = "0.0.4"
 dependencies = [
  "clap",
  "eframe",
