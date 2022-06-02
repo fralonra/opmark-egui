@@ -17,10 +17,10 @@ const BIG_SPACING_X: f32 = 8.0;
 const INDENT_GRID_SIZE: f32 = 16.0;
 const NEW_LINE_HEIGHT: f32 = 16.0;
 
-pub struct App<'a> {
+pub struct App {
     current_page_idx: usize,
     pages: Vec<(Mark, usize, usize)>, // Vec<(marks, max_transition_idx, transition_idx)>
-    title: &'a str,
+    title: String,
     textures: HashMap<String, Texture>,
 }
 
@@ -209,7 +209,7 @@ fn unordered_listing(
     true
 }
 
-impl<'a> epi::App for App<'a> {
+impl epi::App for App {
     fn name(&self) -> &str {
         &self.title
     }
@@ -302,8 +302,8 @@ impl<'a> epi::App for App<'a> {
     }
 }
 
-impl<'a> App<'a> {
-    pub fn new(title: &'a str, iter: Parser) -> Self {
+impl App {
+    pub fn new(title: String, iter: Parser) -> Self {
         App {
             current_page_idx: 0,
             pages: Parser::into_pages(iter),

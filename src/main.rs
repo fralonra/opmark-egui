@@ -1,7 +1,8 @@
 mod app;
+mod parser;
 
 use clap::Parser as ClapParser;
-use opmark::Parser;
+use parser::Parser;
 use std::{
     fs::read_to_string,
     path::{Path, PathBuf},
@@ -21,7 +22,7 @@ fn run_app(path: &Path) {
 
     let parser = Parser::new(file_content);
 
-    let app = app::App::new("test", parser);
+    let app = app::App::new(parser.title, parser.parser);
     let native_options = eframe::NativeOptions {
         always_on_top: false,
         maximized: false,
