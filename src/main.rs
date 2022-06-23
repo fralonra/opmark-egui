@@ -19,10 +19,14 @@ struct Args {
 
 fn run_app(path: &Path) {
     let file_content = read_to_string(path).expect("[ERROR] Reading file");
+    let root = match path.parent() {
+        Some(path) => PathBuf::from(path),
+        None => PathBuf::from("."),
+    };
 
     let parser = Parser::new(file_content);
 
-    let app = app::App::new(parser.title, parser.parser);
+    let app = app::App::new(parser.title, root, parser.parser);
     let native_options = eframe::NativeOptions {
         always_on_top: false,
         maximized: if parser.fullscreen { true } else { false },

@@ -8,7 +8,7 @@ use opmark::{
     Parser,
 };
 use std::collections::HashMap;
-use std::path::Path;
+use std::path::PathBuf;
 use texture::{load_image, Texture};
 
 const NORMAL_SPACING_X: f32 = 2.0;
@@ -20,6 +20,7 @@ const NEW_LINE_HEIGHT: f32 = 16.0;
 pub struct App {
     current_page_idx: usize,
     pages: Vec<(Mark, usize, usize)>, // Vec<(marks, max_transition_idx, transition_idx)>
+    root: PathBuf,
     title: String,
     textures: HashMap<String, Texture>,
 }
@@ -243,8 +244,11 @@ impl epi::App for App {
                                         }
                                         Mark::Image(key, title, style) => {
                                             if !self.textures.contains_key(key) {
+                                                let mut path = PathBuf::new();
+                                                path.push(&self.root);
+                                                path.push(key);
                                                 let texture =
-                                                    load_image(Path::new(key), frame).expect(
+                                                    load_image(path.as_path(), frame).expect(
                                                         &format!("[ERROR] loading image `{}`", key),
                                                     );
                                                 self.textures.insert(key.clone(), texture);
@@ -303,10 +307,11 @@ impl epi::App for App {
 }
 
 impl App {
-    pub fn new(title: String, iter: Parser) -> Self {
+    pub fn new(title: String, root: PathBuf, iter: Parser) -> Self {
         App {
             current_page_idx: 0,
             pages: Parser::into_pages(iter),
+            root,
             title,
             textures: HashMap::new(),
         }
