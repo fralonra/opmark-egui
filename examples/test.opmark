@@ -38,19 +38,19 @@ Picture with width of 50: `<w50>`.
 
 Will show up after one click.
 
-![test](examples/test.png)<w50>
+![test](test.png)<w50>
 ---t2
 Picture with width of 50 and height of 100: `<w50|h100>`.
 
 Will show up after two clicks.
 
-![test](examples/test.png)<w50|h100>
+![test](test.png)<w50|h100>
 ---t0
 Picture with width of 100 and height of 50: `<h50|w100>`.
 
 Will show up initially.
 
-![test](examples/test.png)<h50|w100>
+![test](test.png)<h50|w100>
 
 ---
 
