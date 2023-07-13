@@ -1,14 +1,19 @@
 mod texture;
 
-use eframe::{egui, epi};
+use eframe::{
+    egui::{self, FontData, FontDefinitions, FontFamily},
+    epi,
+};
+use font_kit::{
+    family_name::FamilyName, handle::Handle, properties::Properties, source::SystemSource,
+};
 use opmark::{
     mark::{
         AlignHorizontal, Heading, IndentLevel, Listing, Mark, SeparatorDir, StyleImage, StyleText,
     },
     Parser,
 };
-use std::collections::HashMap;
-use std::path::PathBuf;
+use std::{collections::HashMap, fs::read, path::PathBuf};
 use texture::{load_image, Texture};
 
 const NORMAL_SPACING_X: f32 = 2.0;
@@ -213,6 +218,42 @@ fn unordered_listing(
 impl epi::App for App {
     fn name(&self) -> &str {
         &self.title
+    }
+
+    fn setup(
+        &mut self,
+        ctx: &egui::CtxRef,
+        _frame: &epi::Frame,
+        _storage: Option<&dyn epi::Storage>,
+    ) {
+        let mut fonts = FontDefinitions::default();
+
+        let handle = SystemSource::new()
+            .select_best_match(&[FamilyName::SansSerif], &Properties::new())
+            .expect(&format!("[ERROR] searching for system fonts"));
+
+        let buf: Vec<u8> = match handle {
+            Handle::Memory { bytes, .. } => bytes.to_vec(),
+            Handle::Path { path, .. } => {
+                read(&path).expect(&format!("[ERROR] loading system fonts: '{:?}'", path))
+            }
+        };
+
+        const FONT_SYSTEM_SANS_SERIF: &'static str = "System Sans Serif";
+
+        fonts
+            .font_data
+            .insert(FONT_SYSTEM_SANS_SERIF.to_owned(), FontData::from_owned(buf));
+
+        if let Some(vec) = fonts.fonts_for_family.get_mut(&FontFamily::Proportional) {
+            vec.push(FONT_SYSTEM_SANS_SERIF.to_owned());
+        }
+
+        if let Some(vec) = fonts.fonts_for_family.get_mut(&FontFamily::Monospace) {
+            vec.push(FONT_SYSTEM_SANS_SERIF.to_owned());
+        }
+
+        ctx.set_fonts(fonts);
     }
 
     fn update(&mut self, ctx: &egui::CtxRef, frame: &epi::Frame) {
